@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: timescaledb
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    namespace: timescaledb  #update namespace name if you wish
+    name: in-cluster   #update cluster name if its different
+  source:
+    repoURL: https://charts.timescale.com
+    targetRevision: "0.33.1"
+    chart: timescaledb-single
+    helm:
+      values: |
+        image:
+          tag: pg15.4-ts2.12.2-all

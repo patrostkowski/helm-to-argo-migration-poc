@@ -1,0 +1,3 @@
+apiVersion: v2
+name: mimir-distributed
+version: 5.0.0

@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: directus
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    namespace: directus  #update namespace name if you wish
+    name: in-cluster   #update cluster name if its different
+  source:
+    repoURL: https://directus-community.github.io/helm-chart/
+    targetRevision: "0.3.0"
+    chart: directus
