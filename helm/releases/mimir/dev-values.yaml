@@ -1,2 +1,3 @@
-image:
-  tag: 2.9.0
+mimir-distributed:
+  image:
+    tag: 2.9.0

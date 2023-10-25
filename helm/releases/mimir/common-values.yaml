@@ -1,3 +1,4 @@
-image:
-  repository: grafana/mimir
-  pullPolicy: Always
+mimir-distributed:
+  image:
+    repository: grafana/mimir
+    pullPolicy: Always
