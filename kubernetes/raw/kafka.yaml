@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kafka
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    namespace: kafka  #update namespace name if you wish
+    name: in-cluster   #update cluster name if its different
+  source:
+    repoURL: https://github.com/patrostkowski/helm-to-argo-migration-poc.git
+    targetRevision: "main"
+    path: helm/releases/kafka
+    helm:
+      releaseName: kafka
+      valueFiles:
+        - kafka.yaml
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
