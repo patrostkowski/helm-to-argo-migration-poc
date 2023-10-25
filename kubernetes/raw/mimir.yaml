@@ -9,13 +9,17 @@ spec:
     namespace: mimir  #update namespace name if you wish
     name: in-cluster   #update cluster name if its different
   source:
-    repoURL: https://grafana.github.io/helm-charts
-    targetRevision: "6.58.8"
-    chart: grafana
+    repoURL: https://github.com/patrostkowski/helm-to-argo-migration-poc.git
+    targetRevision: "main"
+    path: helm/releases/mimir
     helm:
-      values: |
-        image:
-          tag: 9.3.6
-        adminPassword: devops123
-        ingress:
-          enabled: true
+      releaseName: mimir
+      valueFiles:
+        - common-values.yaml
+        - dev-values.yaml
+        - project/dev-values.yaml
+        - project/dev-values.secret.enc.yaml
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
