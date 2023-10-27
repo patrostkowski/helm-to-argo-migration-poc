@@ -1,0 +1,4 @@
+auth:
+  postgresPassword: "postgres123"
+image:
+  tag: "16.0.0"

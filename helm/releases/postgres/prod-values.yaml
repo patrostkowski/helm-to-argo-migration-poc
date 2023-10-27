@@ -1,0 +1,7 @@
+auth:
+  postgresPassword: "123qweasdzxc"
+image:
+  tag: "15.0.0"
+serviceAccount:
+  create: true
+  name: prod-sa-postgres
