@@ -1,9 +1,9 @@
 module "dev" {
-  source = "../../submodules/submodule-argo"
+  source = "../../submodules/submodule-argo-v2"
 
   // Pass file content to the module
-  external_config      = file("../../../helm/releases/postgres/dev-values.yaml")
-  external_sops_config = file("../../../helm/releases/postgres/dev-values.secret.enc.yaml")
+  #external_config      = file("../../../helm/releases/postgres/dev-values.yaml")
+  #external_sops_config = file("../../../helm/releases/postgres/dev-values.secret.enc.yaml")
 
   namespace = "dev"
   env       = "dev"

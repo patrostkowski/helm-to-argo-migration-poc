@@ -40,13 +40,17 @@ resource "argocd_application" "helm" {
       target_revision = "13.1.5"
       helm {
         release_name = "${var.env}-${var.name}"
-        values       = local.values
+        value_files = [
+          "helm/releases/${var.name}/dev-values.yaml"
+        ]
       }
     }
 
     source {
       repo_url        = "https://github.com/patrostkowski/helm-to-argo-migration-poc.git"
       target_revision = "main"
+      ref             = "values"
+      path            = "helm/releases/${var.name}"
     }
   }
 }
