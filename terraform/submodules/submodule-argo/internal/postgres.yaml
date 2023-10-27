@@ -1,0 +1,5 @@
+serviceAccount:
+  create: true
+  name: ${service_account_name}
+auth:
+  postgresPassword: ${password}
