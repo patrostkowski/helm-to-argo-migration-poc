@@ -43,13 +43,5 @@ resource "argocd_application" "helm" {
         values       = local.values
       }
     }
-
-    sync_policy {
-      automated {
-        prune       = true
-        self_heal   = true
-        allow_empty = true
-      }
-    }
   }
 }

@@ -4,6 +4,12 @@ variable "external_config" {
   default     = ""
 }
 
+variable "external_sops_config" {
+  description = "Content of the external configuration"
+  type        = string
+  default     = ""
+}
+
 variable "namespace" {
   type = string
 }
