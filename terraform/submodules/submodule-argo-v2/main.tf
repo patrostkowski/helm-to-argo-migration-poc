@@ -73,16 +73,16 @@ resource "argocd_application" "helm" {
       helm {
         release_name = "${var.env}-${var.name}"
         value_files = [
-          local.local_file_path,
-          "$values/helm/releases/postgres/dev-values.yaml",
-          "$values/helm/releases/postgres/dev-valuessecret.enc.yaml",
+          "$root/${basename(dirname(path.cwd))}/${local.local_file_path}",
+          "$root/helm/releases/postgres/dev-values.yaml",
+          "$root/helm/releases/postgres/dev-valuessecret.enc.yaml",
         ]
       }
     }
     source {
       repo_url        = "https://github.com/patrostkowski/helm-to-argo-migration-poc.git"
       target_revision = "main"
-      ref             = "values"
+      ref             = "root"
     }
 
     # source {
