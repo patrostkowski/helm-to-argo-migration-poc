@@ -14,6 +14,8 @@ locals {
     "argocd.example.co/env"          = var.env
     "argocd.example.co/service-name" = var.name
   }
+
+  local_file_path = ".terraform/values/${var.env}-values.internal.yaml"
 }
 
 

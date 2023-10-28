@@ -25,6 +25,11 @@ resource "kubernetes_service_account" "example_service_account" {
   }
 }
 
+resource "local_file" "values" {
+  content  = local.internal_config
+  filename = local.local_file_path
+}
+
 # Helm application
 resource "argocd_application" "helm" {
   metadata {
@@ -49,14 +54,16 @@ resource "argocd_application" "helm" {
       }
     }
 
-    source {
-      repo_url        = "https://charts.bitnami.com/bitnami"
-      chart           = "postgresql"
-      target_revision = "13.1.5"
-      helm {
-        release_name = "${var.env}-${var.name}"
-        values       = local.internal_config
-      }
-    }
+    # source {
+    #   repo_url        = "https://charts.bitnami.com/bitnami"
+    #   chart           = "postgresql"
+    #   target_revision = "13.1.5"
+    #   path            = "terraform/modules/application-argo-dev"
+    #   helm {
+    #     release_name = "${var.env}-${var.name}"
+    #     #values       = local.internal_config
+    #     value_files = [local.local_file_path]
+    #   }
+    # }
   }
 }
