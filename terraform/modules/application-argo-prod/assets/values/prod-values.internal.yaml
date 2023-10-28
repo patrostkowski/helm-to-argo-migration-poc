@@ -1,9 +1,0 @@
-serviceAccount:
-  create: false
-  name: prod-postgres
-auth:
-  postgresPassword: yu}KwXRY3QCBjs?6
-primary:
-  extraEnvVars:
-    - name: MY_WTF
-      value: "asdf"

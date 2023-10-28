@@ -25,10 +25,10 @@ resource "kubernetes_service_account" "example_service_account" {
   }
 }
 
-resource "local_file" "values" {
-  content  = local.internal_config
-  filename = local.local_file_path
-}
+# resource "local_file" "values" {
+#   content  = local.internal_config
+#   filename = local.local_file_path
+# }
 
 resource "argocd_project" "myproject" {
   metadata {

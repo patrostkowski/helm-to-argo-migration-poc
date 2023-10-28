@@ -1,9 +1,0 @@
-serviceAccount:
-  create: false
-  name: dev-postgres
-auth:
-  postgresPassword: Y12IE0HXr*athX5(
-primary:
-  extraEnvVars:
-    - name: MY_WTF
-      value: "asdf"
