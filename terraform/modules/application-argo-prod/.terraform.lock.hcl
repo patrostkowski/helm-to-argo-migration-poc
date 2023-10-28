@@ -94,3 +94,25 @@ provider "registry.terraform.io/oboukili/argocd" {
     "zh:b470c2c7e1cbcff772f483a5341470ff2451d92ea9fbfbba7f63ec04aa7e65f8",
   ]
 }
+
+provider "registry.terraform.io/tyler-technologies/gitops" {
+  version     = "0.0.3-rc"
+  constraints = "0.0.3-rc"
+  hashes = [
+    "h1:MGzZyl6SLds6XON/e1JIF9H5+itslEmelF97t0270os=",
+    "zh:61e2d7b932f9675e7dde9c07815d14dfccd70bc3d9ab1ca22fa9248e91a66f0b",
+    "zh:65e00532e9b082922c773d7ce75e8faf5a777c76a25c75e156f179cd486e9765",
+    "zh:6d3248477a7515b3e87f4c4f9f9fac2129933c87e4259c974f0c4e2a9e9241ba",
+    "zh:76feaf79c7f18dba0c86edc3ae9a551c5d086816995f9aa1c16e45fdc6ae7cc3",
+    "zh:77062cdc73026cbe70f7b0ea7a0f365ac53e29307c135b1e370140510325e19a",
+    "zh:88922b04a38426820b82d86098150b6fe4485978dcf89b075fde7837ca08c243",
+    "zh:926e101e68411d89ffdd13fc92227b4301832f30c8e08151764b62c2663b4adf",
+    "zh:99e4fd939c3be73bdbbb9e122bf84b33718e08e185473b381cd7477500d00f72",
+    "zh:c9f32c5b4541669aeed2ed4e896671b20b5eb0dd9c76596e184d6a4fd15f7515",
+    "zh:cc78bb05d38a23a6eee96bce00d86caadd78e54473d11fcbed9cb59c91e50a70",
+    "zh:d068154ebd908858f5027703396120b02ea26244835dfbb538fda6d6391ef7da",
+    "zh:d44e546573bd7bb171b8d63dbd1786bea56556ebadd5504710ac4cfaa6f1c0c4",
+    "zh:d53a226ac2a026a8e9b46d173844eab061acdf4d4ae554f142fc852169dbd123",
+    "zh:fe883b2fe7888b518a6a89d84e431c23d2f3fd516f8f97c450cf79290644e588",
+  ]
+}

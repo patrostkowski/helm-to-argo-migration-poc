@@ -8,5 +8,9 @@ terraform {
       source  = "hashicorp/kubernetes"
       version = "2.23.0"
     }
+    gitops = {
+      source  = "tyler-technologies/gitops"
+      version = "0.0.3-rc"
+    }
   }
 }

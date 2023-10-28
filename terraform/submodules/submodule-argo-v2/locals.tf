@@ -16,6 +16,8 @@ locals {
   }
 
   local_file_path = "assets/values/${var.env}-values.internal.yaml"
+
+  repo_file_path = "terraform/modules/${basename(path.cwd)}/${local.local_file_path}"
 }
 
 

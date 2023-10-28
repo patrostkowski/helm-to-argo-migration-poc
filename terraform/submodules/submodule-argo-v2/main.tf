@@ -1,3 +1,7 @@
+#######################################
+### SETUP
+#######################################
+
 resource "random_integer" "random" {
   min = 1
   max = 4
@@ -25,10 +29,27 @@ resource "kubernetes_service_account" "example_service_account" {
   }
 }
 
-resource "local_file" "values" {
-  content  = local.internal_config
-  filename = local.local_file_path
+#######################################
+### GITOPS
+#######################################
+
+resource "gitops_checkout" "checkout" {}
+
+resource "gitops_file" "file" {
+  checkout = gitops_checkout.checkout.id
+  path     = local.repo_file_path
+  contents = local.internal_config
 }
+
+resource "gitops_commit" "commit" {
+  commit_message = "Created by terraform gitops_commit"
+  handles        = [gitops_file.file.id]
+}
+
+#######################################
+### ARGO
+#######################################
+
 
 resource "argocd_project" "myproject" {
   metadata {
