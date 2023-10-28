@@ -1,6 +1,9 @@
 auth:
   postgresPassword: "postgres123"
 primary:
+  extraEnvVars:
+    - name: MY_VAR
+      value: "VALUE"
   persistence:
     size: 1Gi
 image:
