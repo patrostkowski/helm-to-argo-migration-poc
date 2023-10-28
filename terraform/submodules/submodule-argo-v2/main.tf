@@ -66,6 +66,11 @@ resource "argocd_application" "helm" {
     }
 
     source {
+      repo_url        = "https://github.com/patrostkowski/helm-to-argo-migration-poc.git"
+      target_revision = "main"
+      ref             = "root"
+    }
+    source {
       repo_url        = "https://charts.bitnami.com/bitnami"
       chart           = "postgresql"
       target_revision = "13.1.5"
@@ -78,11 +83,6 @@ resource "argocd_application" "helm" {
           "$root/helm/releases/postgres/dev-values.secret.enc.yaml",
         ]
       }
-    }
-    source {
-      repo_url        = "https://github.com/patrostkowski/helm-to-argo-migration-poc.git"
-      target_revision = "main"
-      ref             = "root"
     }
   }
 }
