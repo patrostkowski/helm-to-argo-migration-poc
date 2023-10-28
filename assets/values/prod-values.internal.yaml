@@ -1,9 +1,0 @@
-serviceAccount:
-  create: false
-  name: prod-postgres
-auth:
-  postgresPassword: gsD0[WgcTUTz80q?
-primary:
-  extraEnvVars:
-    - name: MY_INTERNAL_VALUE
-      value: "this is internal value"
