@@ -42,6 +42,26 @@ variable "repo_target_revision" {
   default = "main"
 }
 
+variable "repo_git_url" {
+  type    = string
+  default = "https://github.com/patrostkowski/helm-to-argo-migration-poc.git"
+}
+
+variable "helm_repo_url" {
+  type    = string
+  default = "https://charts.bitnami.com/bitnami"
+}
+
+variable "helm_chart_name" {
+  type    = string
+  default = "postgres"
+}
+
+variable "helm_chart_version" {
+  type    = string
+  default = "13.1.5"
+}
+
 variable "sync_policy" {
   type    = bool
   default = false

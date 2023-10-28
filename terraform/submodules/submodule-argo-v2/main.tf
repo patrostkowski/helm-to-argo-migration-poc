@@ -87,7 +87,7 @@ resource "argocd_application" "helm" {
     }
 
     source {
-      repo_url        = "https://github.com/patrostkowski/helm-to-argo-migration-poc.git"
+      repo_url        = var.repo_git_url
       target_revision = var.repo_target_revision
       ref             = "root"
     }
