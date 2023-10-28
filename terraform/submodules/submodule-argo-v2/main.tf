@@ -71,20 +71,19 @@ resource "argocd_application" "helm" {
 
     source {
       repo_url        = "https://github.com/patrostkowski/helm-to-argo-migration-poc.git"
-      target_revision = "main"
+      target_revision = var.repo_target_revision
       ref             = "root"
     }
     source {
       repo_url        = "https://charts.bitnami.com/bitnami"
       chart           = "postgresql"
       target_revision = "13.1.5"
-      path            = "terraform/modules/application-argo-dev"
       helm {
         release_name = "${var.env}-${var.name}"
         value_files = [
           "$root/terraform/modules/${basename(path.cwd)}/${local.local_file_path}",
-          "$root/helm/releases/postgres/dev-values.yaml",
-          "$root/helm/releases/postgres/dev-values.secret.enc.yaml",
+          "$root/helm/releases/postgres/${var.env}-values.yaml",
+          "$root/helm/releases/postgres/${var.env}-values.secret.enc.yaml",
         ]
       }
     }
