@@ -1,10 +1,11 @@
 auth:
-  postgresPassword: "123qweasdzxc"
+  postgresPassword: "qwerasdfzxcv12345"
 image:
   tag: "15.0.0"
 serviceAccount:
-  create: false
+  create: true
+  name: prod-sa-postgres
 primary:
   extraEnvVars:
-    - name: MY_EXTERNAL_VALUE
-      value: "this is external value"
+    - name: MY_EXTERNAL_VALUE_PROD
+      value: "this is external value PROD"
