@@ -4,7 +4,12 @@ locals {
     password             = random_password.password.result
   })
 
-  labels = {
+  app_labels = {
+    "app.kubernetes.io/instance" = "${var.env}-${var.name}"
+    "app.kubernetes.io/name"     = var.name
+  }
+
+  argo_labels = {
     "argocd.argoproj.io/instance"    = "${var.env}-${var.name}"
     "argocd.example.co/env"          = var.env
     "argocd.example.co/service-name" = var.name

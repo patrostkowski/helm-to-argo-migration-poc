@@ -20,8 +20,8 @@ resource "kubernetes_namespace" "example_namespace" {
 
 resource "kubernetes_service_account" "example_service_account" {
   metadata {
-    name   = "${var.env}-${var.name}"
-    labels = local.labels
+    name      = "${var.env}-${var.name}"
+    namespace = kubernetes_namespace.example_namespace.metadata.0.name
   }
 }
 
@@ -30,7 +30,7 @@ resource "argocd_application" "helm" {
   metadata {
     name      = "${var.env}-${var.name}"
     namespace = "argocd"
-    labels    = local.labels
+    labels    = local.app_labels
   }
 
   spec {

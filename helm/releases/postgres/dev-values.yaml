@@ -1,4 +1,7 @@
 auth:
   postgresPassword: "postgres123"
+primary:
+  persistence:
+    size: 1Gi
 image:
   tag: "16.0.0"
