@@ -21,3 +21,8 @@ variable "env" {
 variable "name" {
   type = string
 }
+
+variable "sops" {
+  type    = bool
+  default = false
+}

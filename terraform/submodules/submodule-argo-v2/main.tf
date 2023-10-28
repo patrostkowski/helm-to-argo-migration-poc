@@ -18,14 +18,19 @@ resource "kubernetes_namespace" "example_namespace" {
   }
 }
 
+resource "kubernetes_service_account" "example_service_account" {
+  metadata {
+    name   = "${var.env}-${var.name}"
+    labels = local.labels
+  }
+}
+
 # Helm application
 resource "argocd_application" "helm" {
   metadata {
     name      = "${var.env}-${var.name}"
     namespace = "argocd"
-    labels = {
-      app = "${var.env}-${var.name}"
-    }
+    labels    = local.labels
   }
 
   spec {
@@ -40,20 +45,18 @@ resource "argocd_application" "helm" {
       ref             = "values"
       path            = "helm/releases/${var.name}"
       helm {
-        value_files = ["dev-values.yaml", "dev-values.secret.enc.yaml"]
+        value_files = ["${var.env}-values.yaml", "${var.env}-values.secret.enc.yaml"]
       }
     }
 
-    # source {
-    #   repo_url        = "https://charts.bitnami.com/bitnami"
-    #   chart           = "postgresql"
-    #   target_revision = "13.1.5"
-    #   helm {
-    #     release_name = "${var.env}-${var.name}"
-    #     value_files = [
-    #       "helm/releases/${var.name}/dev-values.yaml"
-    #     ]
-    #   }
-    # }
+    source {
+      repo_url        = "https://charts.bitnami.com/bitnami"
+      chart           = "postgresql"
+      target_revision = "13.1.5"
+      helm {
+        release_name = "${var.env}-${var.name}"
+        values       = local.internal_config
+      }
+    }
   }
 }
