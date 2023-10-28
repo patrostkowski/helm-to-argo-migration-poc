@@ -73,9 +73,9 @@ resource "argocd_application" "helm" {
       helm {
         release_name = "${var.env}-${var.name}"
         value_files = [
-          "$root/${basename(dirname(path.cwd))}/${local.local_file_path}",
+          "$root/terraform/modules/${basename(path.cwd)}/${local.local_file_path}",
           "$root/helm/releases/postgres/dev-values.yaml",
-          "$root/helm/releases/postgres/dev-valuessecret.enc.yaml",
+          "$root/helm/releases/postgres/dev-values.secret.enc.yaml",
         ]
       }
     }
