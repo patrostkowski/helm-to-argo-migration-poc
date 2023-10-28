@@ -26,3 +26,8 @@ variable "sops" {
   type    = bool
   default = false
 }
+
+variable "argocd_project_name" {
+  type    = string
+  default = "myproject"
+}

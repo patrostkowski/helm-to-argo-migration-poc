@@ -5,5 +5,5 @@ auth:
   postgresPassword: ${password}
 primary:
   extraEnvVars:
-    - name: MY_WTF
-      value: "asdf"
+    - name: MY_INTERNAL_VALUE
+      value: "this is internal value"

@@ -5,3 +5,7 @@ image:
 serviceAccount:
   create: true
   name: prod-sa-postgres
+primary:
+  extraEnvVars:
+    - name: MY_EXTERNAL_VALUE
+      value: "this is external value"

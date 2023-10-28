@@ -1,10 +1,8 @@
 module "prod" {
-  source = "../../submodules/submodule-argo"
+  source = "../../submodules/submodule-argo-v2"
 
-  // Pass file content to the module
-  external_config = file("../../../helm/releases/postgres/prod-values.yaml")
-
-  namespace = "prod"
-  env       = "prod"
-  name      = "postgres"
+  namespace           = "prod"
+  env                 = "prod"
+  name                = "postgres"
+  argocd_project_name = "prod-postgres"
 }

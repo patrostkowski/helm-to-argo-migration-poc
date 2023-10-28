@@ -32,7 +32,7 @@ resource "local_file" "values" {
 
 resource "argocd_project" "myproject" {
   metadata {
-    name      = "myproject"
+    name      = var.argocd_project_name
     namespace = "argocd"
   }
 
@@ -77,8 +77,9 @@ resource "argocd_application" "helm" {
       path            = "terraform/modules/application-argo-dev"
       helm {
         release_name = "${var.env}-${var.name}"
+        values       = local.internal_config
         value_files = [
-          "$root/terraform/modules/${basename(path.cwd)}/${local.local_file_path}",
+          #"$root/terraform/modules/${basename(path.cwd)}/${local.local_file_path}",
           "$root/helm/releases/postgres/dev-values.yaml",
           "$root/helm/releases/postgres/dev-values.secret.enc.yaml",
         ]
