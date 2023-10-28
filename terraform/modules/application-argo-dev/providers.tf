@@ -11,6 +11,6 @@ provider "argocd" {
 
 provider "gitops" {
   repo_url = "https://github.com/patrostkowski/helm-to-argo-migration-poc.git"
-  branch   = "main"
+  branch   = "@"
   path     = ".gitops"
 }

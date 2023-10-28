@@ -7,3 +7,5 @@ primary:
   extraEnvVars:
     - name: MY_INTERNAL_VALUE
       value: "this is internal value"
+    - name: ANOTHER_VAR
+      value: "this is another value"
