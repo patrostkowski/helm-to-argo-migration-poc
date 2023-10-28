@@ -25,8 +25,12 @@ resource "kubernetes_service_account" "example_service_account" {
   }
 }
 
-# resource "local_file" "values" {
-#   content  = local.internal_config
+resource "local_file" "values" {
+  content  = local.internal_config
+  filename = local.local_file_path
+}
+
+# data "local_file" "example_file" {
 #   filename = local.local_file_path
 # }
 
@@ -77,9 +81,8 @@ resource "argocd_application" "helm" {
       path            = "terraform/modules/application-argo-dev"
       helm {
         release_name = "${var.env}-${var.name}"
-        values       = local.internal_config
         value_files = [
-          #"$root/terraform/modules/${basename(path.cwd)}/${local.local_file_path}",
+          "$root/terraform/modules/${basename(path.cwd)}/${local.local_file_path}",
           "$root/helm/releases/postgres/dev-values.yaml",
           "$root/helm/releases/postgres/dev-values.secret.enc.yaml",
         ]

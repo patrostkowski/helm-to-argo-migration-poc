@@ -5,4 +5,6 @@ module "prod" {
   env                 = "prod"
   name                = "postgres"
   argocd_project_name = "prod-postgres"
+
+  repo_target_revision = "test2"
 }

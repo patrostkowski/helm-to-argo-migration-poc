@@ -31,3 +31,8 @@ variable "argocd_project_name" {
   type    = string
   default = "myproject"
 }
+
+variable "repo_target_revision" {
+  type    = string
+  default = "main"
+}
