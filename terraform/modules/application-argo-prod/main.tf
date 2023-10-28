@@ -6,5 +6,5 @@ module "prod" {
   name                = "postgres"
   argocd_project_name = "prod-postgres"
 
-  repo_target_revision = "test2"
+  repo_target_revision = "main"
 }
