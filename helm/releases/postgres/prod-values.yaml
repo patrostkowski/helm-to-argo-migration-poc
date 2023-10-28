@@ -3,8 +3,7 @@ auth:
 image:
   tag: "15.0.0"
 serviceAccount:
-  create: true
-  name: prod-sa-postgres
+  create: false
 primary:
   extraEnvVars:
     - name: MY_EXTERNAL_VALUE
