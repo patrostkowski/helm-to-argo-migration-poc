@@ -101,8 +101,8 @@ resource "argocd_application" "helm" {
           [
             "$root/terraform/modules/${basename(path.cwd)}/${local.local_file_path}",
           ],
-          (var.sops ? ["$root/helm/releases/postgres/${var.env}-values.secret.enc.yaml"] : []),
-          (var.custom_values ? ["$root/helm/releases/postgres/${var.env}-values.yaml"] : [])
+          (var.sops ? ["$root/helm/releases/${var.name}/${var.env}-values.secret.enc.yaml"] : []),
+          (var.custom_values ? ["$root/helm/releases/${var.name}/${var.env}-values.yaml"] : [])
         )
       }
     }
