@@ -7,4 +7,5 @@ module "prod" {
   argocd_project_name = "prod-postgres"
 
   repo_target_revision = "main"
+  custom_values        = true
 }

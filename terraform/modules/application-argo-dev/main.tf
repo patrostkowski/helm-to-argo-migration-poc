@@ -5,5 +5,6 @@ module "dev" {
   env       = "dev"
   name      = "postgres"
 
-  sync_policy = true
+  sync_policy   = true
+  custom_values = true
 }

@@ -97,11 +97,12 @@ resource "argocd_application" "helm" {
       target_revision = "13.1.5"
       helm {
         release_name = "${var.env}-${var.name}"
-        value_files = concat([
-          "$root/terraform/modules/${basename(path.cwd)}/${local.local_file_path}",
-          "$root/helm/releases/postgres/${var.env}-values.yaml",
+        value_files = concat(
+          [
+            "$root/terraform/modules/${basename(path.cwd)}/${local.local_file_path}",
           ],
-          (var.sops ? ["$root/helm/releases/postgres/${var.env}-values.secret.enc.yaml"] : [])
+          (var.sops ? ["$root/helm/releases/postgres/${var.env}-values.secret.enc.yaml"] : []),
+          (var.custom_values ? ["$root/helm/releases/postgres/${var.env}-values.yaml"] : [])
         )
       }
     }
