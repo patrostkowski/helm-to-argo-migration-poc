@@ -30,6 +30,25 @@ resource "local_file" "values" {
   filename = local.local_file_path
 }
 
+resource "argocd_project" "myproject" {
+  metadata {
+    name      = "myproject"
+    namespace = "argocd"
+  }
+
+  spec {
+    description = "simple project"
+
+    source_namespaces = ["argocd"]
+    source_repos      = ["*"]
+
+    destination {
+      server    = "https://kubernetes.default.svc"
+      namespace = kubernetes_namespace.example_namespace.metadata.0.name
+    }
+  }
+}
+
 # Helm application
 resource "argocd_application" "helm" {
   metadata {
@@ -39,21 +58,42 @@ resource "argocd_application" "helm" {
   }
 
   spec {
+    project = argocd_project.myproject.metadata[0].name
+
     destination {
       server    = "https://kubernetes.default.svc"
       namespace = kubernetes_namespace.example_namespace.metadata.0.name
     }
 
     source {
+      repo_url        = "https://charts.bitnami.com/bitnami"
+      chart           = "postgresql"
+      target_revision = "13.1.5"
+      path            = "terraform/modules/application-argo-dev"
+      helm {
+        release_name = "${var.env}-${var.name}"
+        value_files = [
+          local.local_file_path,
+          "$values/helm/releases/postgres/dev-values.yaml",
+          "$values/helm/releases/postgres/dev-valuessecret.enc.yaml",
+        ]
+      }
+    }
+    source {
       repo_url        = "https://github.com/patrostkowski/helm-to-argo-migration-poc.git"
       target_revision = "main"
       ref             = "values"
-      path            = "helm/releases/${var.name}"
-      helm {
-        value_files = ["${var.env}-values.yaml", "${var.env}-values.secret.enc.yaml"]
-      }
     }
 
+    # source {
+    #   repo_url        = "https://github.com/patrostkowski/helm-to-argo-migration-poc.git"
+    #   target_revision = "main"
+    #   ref             = "values"
+    #   path            = "helm/releases/${var.name}"
+    #   helm {
+    #     value_files = ["${var.env}-values.yaml", "${var.env}-values.secret.enc.yaml"]
+    #   }
+    # }
     # source {
     #   repo_url        = "https://charts.bitnami.com/bitnami"
     #   chart           = "postgresql"
