@@ -4,4 +4,6 @@ module "dev" {
   namespace = "dev"
   env       = "dev"
   name      = "postgres"
+
+  sync_policy = true
 }

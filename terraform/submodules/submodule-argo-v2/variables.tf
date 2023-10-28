@@ -36,3 +36,8 @@ variable "repo_target_revision" {
   type    = string
   default = "main"
 }
+
+variable "sync_policy" {
+  type    = bool
+  default = false
+}

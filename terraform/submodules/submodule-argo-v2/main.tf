@@ -30,10 +30,6 @@ resource "local_file" "values" {
   filename = local.local_file_path
 }
 
-# data "local_file" "example_file" {
-#   filename = local.local_file_path
-# }
-
 resource "argocd_project" "myproject" {
   metadata {
     name      = var.argocd_project_name
@@ -80,11 +76,19 @@ resource "argocd_application" "helm" {
       target_revision = "13.1.5"
       helm {
         release_name = "${var.env}-${var.name}"
-        value_files = [
+        value_files = concat([
           "$root/terraform/modules/${basename(path.cwd)}/${local.local_file_path}",
           "$root/helm/releases/postgres/${var.env}-values.yaml",
-          "$root/helm/releases/postgres/${var.env}-values.secret.enc.yaml",
-        ]
+          ],
+          (var.sops ? ["$root/helm/releases/postgres/${var.env}-values.secret.enc.yaml"] : [])
+        )
+      }
+    }
+    sync_policy {
+      automated {
+        prune       = false
+        self_heal   = var.sync_policy
+        allow_empty = var.sync_policy
       }
     }
   }
