@@ -42,7 +42,7 @@ resource "gitops_file" "file" {
 }
 
 resource "gitops_commit" "commit" {
-  commit_message = "Created by terraform gitops_commit"
+  commit_message = "Update ${path.module} values file in ${local.repo_file_path}."
   handles        = [gitops_file.file.id]
 }
 
@@ -113,4 +113,6 @@ resource "argocd_application" "helm" {
       }
     }
   }
+
+  depends_on = [gitops_commit.commit]
 }
