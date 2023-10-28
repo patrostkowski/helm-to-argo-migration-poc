@@ -42,7 +42,7 @@ resource "gitops_file" "file" {
 }
 
 resource "gitops_commit" "commit" {
-  commit_message = "Update ${path.module} values file in ${local.repo_file_path}."
+  commit_message = "Update ${basename(path.cwd)} values file in ${local.repo_file_path}."
   handles        = [gitops_file.file.id]
 }
 
