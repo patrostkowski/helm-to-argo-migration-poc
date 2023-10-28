@@ -24,7 +24,7 @@ resource "kubernetes_namespace" "example_namespace" {
 
 resource "kubernetes_service_account" "example_service_account" {
   metadata {
-    name      = "${var.env}-${var.name}"
+    name      = local.common_name
     namespace = kubernetes_namespace.example_namespace.metadata.0.name
   }
 }
@@ -42,7 +42,7 @@ resource "gitops_file" "file" {
 }
 
 resource "gitops_commit" "commit" {
-  commit_message = "Update ${basename(path.cwd)} values file in ${local.repo_file_path}."
+  commit_message = "Update ${basename(path.cwd)} that manages ${local.common_name} value file in ${local.repo_file_path}."
   handles        = [gitops_file.file.id]
 }
 
@@ -73,7 +73,7 @@ resource "argocd_project" "myproject" {
 # Helm application
 resource "argocd_application" "helm" {
   metadata {
-    name      = "${var.env}-${var.name}"
+    name      = local.common_name
     namespace = "argocd"
     labels    = local.app_labels
   }

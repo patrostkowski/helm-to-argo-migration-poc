@@ -46,3 +46,7 @@ variable "sync_policy" {
   type    = bool
   default = false
 }
+
+variable "project" {
+  type = string
+}
