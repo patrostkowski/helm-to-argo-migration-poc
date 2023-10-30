@@ -1,0 +1,9 @@
+serviceAccount:
+  create: false
+  name: ${service_account_name}
+auth:
+  postgresPassword: ${password}
+primary:
+  extraEnvVars:
+    - name: MY_INTERNAL_VALUE
+      value: "this is internal value"
