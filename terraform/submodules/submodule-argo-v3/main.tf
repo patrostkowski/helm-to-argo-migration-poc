@@ -26,6 +26,9 @@ resource "kubernetes_service_account" "example_service_account" {
   metadata {
     name      = local.common_name
     namespace = kubernetes_namespace.example_namespace.metadata.0.name
+    labels = {
+      "app.kubernetes.io/instance" = "${var.env}-${var.name}"
+    }
   }
 }
 
@@ -70,11 +73,15 @@ resource "argocd_application" "helm" {
     }
 
     source {
+      repo_url        = "https://github.com/patrostkowski/helm-to-argo-migration-poc.git"
+      target_revision = "main"
+    }
+    source {
       repo_url        = "https://charts.bitnami.com/bitnami"
       chart           = "postgresql"
       target_revision = "13.1.5"
       helm {
-        release_name = "${var.env}-${var.name}"
+        release_name = local.common_name
         values       = local.merged_config
       }
     }

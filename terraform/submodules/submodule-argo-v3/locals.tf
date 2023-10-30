@@ -6,10 +6,15 @@ locals {
     password             = random_password.password.result
   })
 
-  merged_config = var.external_config != "" ? yamlencode(merge(
+  merged_external_config = yamlencode(merge(
+    var.external_config != "" ? yamldecode(var.external_config) : {},
+    var.external_sops_config != "" ? yamldecode(var.external_sops_config) : {}
+  ))
+
+  merged_config = yamlencode(merge(
     yamldecode(local.internal_config),
-    yamldecode(var.external_config)
-  )) : local.internal_config
+    yamldecode(local.merged_external_config)
+  ))
 
   app_labels = {
     "app.kubernetes.io/instance" = "${var.env}-${var.name}"
@@ -21,10 +26,6 @@ locals {
     "argocd.example.co/env"          = var.env
     "argocd.example.co/service-name" = var.name
   }
-
-  local_file_path = "assets/values/${var.env}-values.internal.yaml"
-
-  repo_file_path = "terraform/modules/${basename(path.cwd)}/${local.local_file_path}"
 }
 
 

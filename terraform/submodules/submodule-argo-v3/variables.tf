@@ -1,9 +1,3 @@
-variable "external_sops_config" {
-  description = "Content of the external configuration"
-  type        = string
-  default     = ""
-}
-
 variable "namespace" {
   type = string
 }
@@ -52,6 +46,13 @@ variable "project" {
 
 variable "external_config" {
   description = "External configuration in YAML format"
+  type        = string
+  default     = <<EOT
+EOT
+}
+
+variable "external_sops_config" {
+  description = "External sops configuration in YAML format"
   type        = string
   default     = <<EOT
 EOT
