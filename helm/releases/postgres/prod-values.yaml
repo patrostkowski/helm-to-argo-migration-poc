@@ -1,7 +1,10 @@
 primary:
+  extraEnvVars:
+    - name: MY_EXTERNAL_VALUE
+      value: "this is external value xdd"
   resources:
     requests:
       cpu: 100m
   service:
     ports:
-      postgresql: 1234
+      postgresql: 5433
