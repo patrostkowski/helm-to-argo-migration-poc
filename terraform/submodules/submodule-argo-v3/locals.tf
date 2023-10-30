@@ -6,14 +6,10 @@ locals {
     password             = random_password.password.result
   })
 
-  merged_external_config = yamlencode(merge(
-    var.external_config != "" ? yamldecode(var.external_config) : {},
-    var.external_sops_config != "" ? yamldecode(var.external_sops_config) : {}
-  ))
-
   merged_config = yamlencode(merge(
     yamldecode(local.internal_config),
-    yamldecode(local.merged_external_config)
+    yamldecode(var.external_config),
+    yamldecode(var.external_sops_config)
   ))
 
   app_labels = {

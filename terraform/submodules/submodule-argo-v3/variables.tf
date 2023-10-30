@@ -47,13 +47,11 @@ variable "project" {
 variable "external_config" {
   description = "External configuration in YAML format"
   type        = string
-  default     = <<EOT
-EOT
+  default     = "{}"
 }
 
 variable "external_sops_config" {
   description = "External sops configuration in YAML format"
   type        = string
-  default     = <<EOT
-EOT
+  default     = "{}"
 }
