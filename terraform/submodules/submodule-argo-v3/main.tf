@@ -73,11 +73,11 @@ resource "argocd_application" "helm" {
     }
 
     source {
-      repo_url        = "https://charts.bitnami.com/bitnami"
-      chart           = "postgresql"
-      target_revision = "13.1.5"
+      repo_url        = var.helm_repo_url
+      chart           = var.helm_repo_chart_name
+      target_revision = var.helm_chart_version
       helm {
-        release_name = local.common_name
+        release_name = var.release_name
         values       = local.merged_config
       }
     }

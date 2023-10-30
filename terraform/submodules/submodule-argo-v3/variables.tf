@@ -10,29 +10,9 @@ variable "name" {
   type = string
 }
 
-variable "sops" {
-  type    = bool
-  default = false
-}
-
-variable "custom_values" {
-  type    = bool
-  default = false
-}
-
 variable "argocd_project_name" {
   type    = string
   default = "myproject"
-}
-
-variable "repo_target_revision" {
-  type    = string
-  default = "main"
-}
-
-variable "repo_git_url" {
-  type    = string
-  default = "https://github.com/patrostkowski/helm-to-argo-migration-poc.git"
 }
 
 variable "sync_policy" {
@@ -54,4 +34,23 @@ variable "external_sops_config" {
   description = "External sops configuration in YAML format"
   type        = string
   default     = "{}"
+}
+
+variable "helm_repo_url" {
+  type    = string
+  default = "https://charts.bitnami.com/bitnami"
+}
+
+variable "helm_repo_chart_name" {
+  type    = string
+  default = "postgresql"
+}
+
+variable "helm_chart_version" {
+  type    = string
+  default = "13.1.5"
+}
+
+variable "release_name" {
+  type = string
 }
