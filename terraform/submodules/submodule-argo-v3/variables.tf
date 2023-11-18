@@ -36,16 +36,6 @@ variable "external_sops_config" {
   default     = "{}"
 }
 
-variable "helm_repo_url" {
-  type    = string
-  default = "https://charts.bitnami.com/bitnami"
-}
-
-variable "helm_repo_chart_name" {
-  type    = string
-  default = "postgresql"
-}
-
 variable "helm_chart_version" {
   type    = string
   default = "13.1.5"

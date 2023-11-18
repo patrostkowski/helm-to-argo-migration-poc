@@ -4,7 +4,7 @@ primary:
       value: "this is external value xdd"
   resources:
     requests:
-      cpu: 100m
+      cpu: 101m
   service:
     ports:
       postgresql: 5433
